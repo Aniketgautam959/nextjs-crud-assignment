@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 10, "column": 0}, "map": {"version":3,"sources":["file:///Users/aniketgautam/nextjs-crud-assignment/app/page.js"],"sourcesContent":["import Link from 'next/link'\n\nexport default function HomePage() {\n  return (\n    <main>\n      <h1>Simple Users CRUD</h1>\n      <Link href=\"/users\">Go to Users</Link>\n    </main>\n  )\n}\n"],"names":["HomePage","href"],"mappings":";;;;;AAAA;;;AAEe,SAASA;IACtB,qBACE,8QAAC;;0BACC,8QAAC;0BAAG;;;;;;0BACJ,8QAAC,0NAAI;gBAACC,MAAK;0BAAS;;;;;;;;;;;;AAG1B"}}]
+}

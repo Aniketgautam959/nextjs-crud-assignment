@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///Users/aniketgautam/nextjs-crud-assignment/app/globals.css"],"sourcesContent":["body {\n  margin: 0;\n  padding: 24px;\n  font-family: Arial, sans-serif;\n}\n\na {\n  color: #111;\n}\n\nbutton {\n  cursor: pointer;\n}\n"],"names":[],"mappings":"AAAA;;;;;;AAMA;;;;AAIA"}}]
+}
