@@ -29,7 +29,14 @@ function UsersPage() {
                     if (!res.ok) {
                         throw new Error('Failed to fetch users');
                     }
-                    const data = await res.json();
+                    const params = new URLSearchParams(window.location.search);
+                    const deletedId = params.get('deletedId');
+                    let data = await res.json();
+                    if (deletedId) {
+                        data = data.filter({
+                            "UsersPage.useEffect.getUsers": (item)=>String(item.id) !== String(deletedId)
+                        }["UsersPage.useEffect.getUsers"]);
+                    }
                     setUsers(data);
                 } catch (err) {
                     setError(err.message || 'Something went wrong');
@@ -45,7 +52,7 @@ function UsersPage() {
             children: "Loading users..."
         }, void 0, false, {
             fileName: "[project]/nextjs-crud-assignment/app/users/page.js",
-            lineNumber: 33,
+            lineNumber: 38,
             columnNumber: 12
         }, this);
     }
@@ -54,7 +61,7 @@ function UsersPage() {
             children: error
         }, void 0, false, {
             fileName: "[project]/nextjs-crud-assignment/app/users/page.js",
-            lineNumber: 37,
+            lineNumber: 42,
             columnNumber: 12
         }, this);
     }
@@ -64,7 +71,7 @@ function UsersPage() {
                 children: "Users"
             }, void 0, false, {
                 fileName: "[project]/nextjs-crud-assignment/app/users/page.js",
-                lineNumber: 42,
+                lineNumber: 47,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$nextjs$2d$crud$2d$assignment$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -77,14 +84,14 @@ function UsersPage() {
                                 children: user.name
                             }, void 0, false, {
                                 fileName: "[project]/nextjs-crud-assignment/app/users/page.js",
-                                lineNumber: 46,
+                                lineNumber: 51,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$nextjs$2d$crud$2d$assignment$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 children: user.email
                             }, void 0, false, {
                                 fileName: "[project]/nextjs-crud-assignment/app/users/page.js",
-                                lineNumber: 47,
+                                lineNumber: 52,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$nextjs$2d$crud$2d$assignment$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$nextjs$2d$crud$2d$assignment$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -93,29 +100,29 @@ function UsersPage() {
                                     children: "View"
                                 }, void 0, false, {
                                     fileName: "[project]/nextjs-crud-assignment/app/users/page.js",
-                                    lineNumber: 49,
+                                    lineNumber: 54,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/nextjs-crud-assignment/app/users/page.js",
-                                lineNumber: 48,
+                                lineNumber: 53,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, user.id, true, {
                         fileName: "[project]/nextjs-crud-assignment/app/users/page.js",
-                        lineNumber: 45,
+                        lineNumber: 50,
                         columnNumber: 11
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/nextjs-crud-assignment/app/users/page.js",
-                lineNumber: 43,
+                lineNumber: 48,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/nextjs-crud-assignment/app/users/page.js",
-        lineNumber: 41,
+        lineNumber: 46,
         columnNumber: 5
     }, this);
 }

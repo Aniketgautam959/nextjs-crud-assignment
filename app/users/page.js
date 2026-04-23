@@ -17,7 +17,12 @@ export default function UsersPage() {
         if (!res.ok) {
           throw new Error('Failed to fetch users')
         }
-        const data = await res.json()
+        const params = new URLSearchParams(window.location.search)
+        const deletedId = params.get('deletedId')
+        let data = await res.json()
+        if (deletedId) {
+          data = data.filter((item) => String(item.id) !== String(deletedId))
+        }
         setUsers(data)
       } catch (err) {
         setError(err.message || 'Something went wrong')

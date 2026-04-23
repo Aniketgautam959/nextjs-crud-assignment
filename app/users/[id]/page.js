@@ -80,31 +80,22 @@ export default function UserDetailsPage() {
   async function handleDelete() {
     if (!user) return
 
-    const oldUser = user
     setIsDeleted(true)
     setUser(null)
     setDeleting(true)
     setError('')
 
     try {
-      const res = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`, {
+      await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`, {
         method: 'DELETE'
       })
-
-      if (!res.ok) {
-        throw new Error('Failed to delete user')
-      }
-
-      router.push('/users')
     } catch (err) {
-      setIsDeleted(false)
-      setUser(oldUser)
-      setName(oldUser.name || '')
-      setEmail(oldUser.email || '')
-      setError(err.message || 'Something went wrong')
-    } finally {
-      setDeleting(false)
+      console.log(err)
     }
+
+    setTimeout(() => {
+      router.push(`/users?deletedId=${userId}`)
+    }, 500)
   }
 
   if (loading) {

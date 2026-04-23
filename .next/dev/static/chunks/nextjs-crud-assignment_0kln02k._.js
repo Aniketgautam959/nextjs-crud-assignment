@@ -92,35 +92,27 @@ function UserDetailsPage() {
     }
     async function handleDelete() {
         if (!user) return;
-        const oldUser = user;
         setIsDeleted(true);
         setUser(null);
         setDeleting(true);
         setError('');
         try {
-            const res = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`, {
+            await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`, {
                 method: 'DELETE'
             });
-            if (!res.ok) {
-                throw new Error('Failed to delete user');
-            }
-            router.push('/users');
         } catch (err) {
-            setIsDeleted(false);
-            setUser(oldUser);
-            setName(oldUser.name || '');
-            setEmail(oldUser.email || '');
-            setError(err.message || 'Something went wrong');
-        } finally{
-            setDeleting(false);
+            console.log(err);
         }
+        setTimeout(()=>{
+            router.push(`/users?deletedId=${userId}`);
+        }, 500);
     }
     if (loading) {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$nextjs$2d$crud$2d$assignment$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
             children: "Loading user..."
         }, void 0, false, {
             fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-            lineNumber: 111,
+            lineNumber: 102,
             columnNumber: 12
         }, this);
     }
@@ -131,7 +123,7 @@ function UserDetailsPage() {
                     children: error
                 }, void 0, false, {
                     fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-                    lineNumber: 117,
+                    lineNumber: 108,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$nextjs$2d$crud$2d$assignment$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$nextjs$2d$crud$2d$assignment$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -139,13 +131,13 @@ function UserDetailsPage() {
                     children: "Back to users"
                 }, void 0, false, {
                     fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-                    lineNumber: 118,
+                    lineNumber: 109,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-            lineNumber: 116,
+            lineNumber: 107,
             columnNumber: 7
         }, this);
     }
@@ -154,7 +146,7 @@ function UserDetailsPage() {
             children: "Deleting user..."
         }, void 0, false, {
             fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-            lineNumber: 124,
+            lineNumber: 115,
             columnNumber: 12
         }, this);
     }
@@ -165,7 +157,7 @@ function UserDetailsPage() {
                     children: "User not found"
                 }, void 0, false, {
                     fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-                    lineNumber: 130,
+                    lineNumber: 121,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$nextjs$2d$crud$2d$assignment$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$nextjs$2d$crud$2d$assignment$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -173,13 +165,13 @@ function UserDetailsPage() {
                     children: "Back to users"
                 }, void 0, false, {
                     fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-                    lineNumber: 131,
+                    lineNumber: 122,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-            lineNumber: 129,
+            lineNumber: 120,
             columnNumber: 7
         }, this);
     }
@@ -189,7 +181,7 @@ function UserDetailsPage() {
                 children: "User Details"
             }, void 0, false, {
                 fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-                lineNumber: 138,
+                lineNumber: 129,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$nextjs$2d$crud$2d$assignment$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -199,7 +191,7 @@ function UserDetailsPage() {
                 ]
             }, void 0, true, {
                 fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-                lineNumber: 139,
+                lineNumber: 130,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$nextjs$2d$crud$2d$assignment$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -209,7 +201,7 @@ function UserDetailsPage() {
                 ]
             }, void 0, true, {
                 fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-                lineNumber: 140,
+                lineNumber: 131,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$nextjs$2d$crud$2d$assignment$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -217,7 +209,7 @@ function UserDetailsPage() {
                 children: showForm ? 'Cancel' : 'Update'
             }, void 0, false, {
                 fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-                lineNumber: 142,
+                lineNumber: 133,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$nextjs$2d$crud$2d$assignment$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -229,7 +221,7 @@ function UserDetailsPage() {
                 children: deleting ? 'Deleting...' : 'Delete'
             }, void 0, false, {
                 fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-                lineNumber: 146,
+                lineNumber: 137,
                 columnNumber: 7
             }, this),
             showForm && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$nextjs$2d$crud$2d$assignment$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -244,12 +236,12 @@ function UserDetailsPage() {
                                 children: "Name"
                             }, void 0, false, {
                                 fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-                                lineNumber: 153,
+                                lineNumber: 144,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$nextjs$2d$crud$2d$assignment$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                 fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-                                lineNumber: 154,
+                                lineNumber: 145,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$nextjs$2d$crud$2d$assignment$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -258,13 +250,13 @@ function UserDetailsPage() {
                                 required: true
                             }, void 0, false, {
                                 fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-                                lineNumber: 155,
+                                lineNumber: 146,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-                        lineNumber: 152,
+                        lineNumber: 143,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$nextjs$2d$crud$2d$assignment$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -276,12 +268,12 @@ function UserDetailsPage() {
                                 children: "Email"
                             }, void 0, false, {
                                 fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-                                lineNumber: 158,
+                                lineNumber: 149,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$nextjs$2d$crud$2d$assignment$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                 fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-                                lineNumber: 159,
+                                lineNumber: 150,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$nextjs$2d$crud$2d$assignment$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -291,13 +283,13 @@ function UserDetailsPage() {
                                 required: true
                             }, void 0, false, {
                                 fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-                                lineNumber: 160,
+                                lineNumber: 151,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-                        lineNumber: 157,
+                        lineNumber: 148,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$nextjs$2d$crud$2d$assignment$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -309,13 +301,13 @@ function UserDetailsPage() {
                         children: updating ? 'Saving...' : 'Save'
                     }, void 0, false, {
                         fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-                        lineNumber: 167,
+                        lineNumber: 158,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-                lineNumber: 151,
+                lineNumber: 142,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$nextjs$2d$crud$2d$assignment$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -327,18 +319,18 @@ function UserDetailsPage() {
                     children: "Back to users"
                 }, void 0, false, {
                     fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-                    lineNumber: 174,
+                    lineNumber: 165,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-                lineNumber: 173,
+                lineNumber: 164,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/nextjs-crud-assignment/app/users/[id]/page.js",
-        lineNumber: 137,
+        lineNumber: 128,
         columnNumber: 5
     }, this);
 }
