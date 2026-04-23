@@ -28,7 +28,12 @@ export default function UserDetailsPage() {
         if (!res.ok) {
           throw new Error('Failed to fetch user')
         }
-        const data = await res.json()
+        let data = await res.json()
+        const overrides = JSON.parse(localStorage.getItem('user_overrides') || '{}')
+        const changed = overrides[String(userId)]
+        if (changed) {
+          data = { ...data, ...changed }
+        }
         setUser(data)
         setName(data.name || '')
         setEmail(data.email || '')
@@ -54,6 +59,9 @@ export default function UserDetailsPage() {
     setShowForm(false)
     setUpdating(true)
     setError('')
+    const overrides = JSON.parse(localStorage.getItem('user_overrides') || '{}')
+    overrides[String(userId)] = { name, email }
+    localStorage.setItem('user_overrides', JSON.stringify(overrides))
 
     try {
       const res = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`, {
@@ -71,6 +79,12 @@ export default function UserDetailsPage() {
       setUser(oldUser)
       setName(oldUser.name || '')
       setEmail(oldUser.email || '')
+      const rolledBackOverrides = JSON.parse(localStorage.getItem('user_overrides') || '{}')
+      rolledBackOverrides[String(userId)] = {
+        name: oldUser.name || '',
+        email: oldUser.email || ''
+      }
+      localStorage.setItem('user_overrides', JSON.stringify(rolledBackOverrides))
       setError(err.message || 'Something went wrong')
     } finally {
       setUpdating(false)
@@ -84,6 +98,14 @@ export default function UserDetailsPage() {
     setUser(null)
     setDeleting(true)
     setError('')
+    const savedDeletedIds = JSON.parse(localStorage.getItem('deleted_user_ids') || '[]')
+    if (!savedDeletedIds.includes(String(userId))) {
+      savedDeletedIds.push(String(userId))
+      localStorage.setItem('deleted_user_ids', JSON.stringify(savedDeletedIds))
+    }
+    const overrides = JSON.parse(localStorage.getItem('user_overrides') || '{}')
+    delete overrides[String(userId)]
+    localStorage.setItem('user_overrides', JSON.stringify(overrides))
 
     try {
       await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`, {

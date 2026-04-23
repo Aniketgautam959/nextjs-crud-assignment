@@ -19,10 +19,19 @@ export default function UsersPage() {
         }
         const params = new URLSearchParams(window.location.search)
         const deletedId = params.get('deletedId')
-        let data = await res.json()
-        if (deletedId) {
-          data = data.filter((item) => String(item.id) !== String(deletedId))
+        const savedDeletedIds = JSON.parse(localStorage.getItem('deleted_user_ids') || '[]')
+        if (deletedId && !savedDeletedIds.includes(String(deletedId))) {
+          savedDeletedIds.push(String(deletedId))
+          localStorage.setItem('deleted_user_ids', JSON.stringify(savedDeletedIds))
         }
+        const overrides = JSON.parse(localStorage.getItem('user_overrides') || '{}')
+        let data = await res.json()
+        data = data.filter((item) => !savedDeletedIds.includes(String(item.id)))
+        data = data.map((item) => {
+          const changed = overrides[String(item.id)]
+          if (!changed) return item
+          return { ...item, ...changed }
+        })
         setUsers(data)
       } catch (err) {
         setError(err.message || 'Something went wrong')
